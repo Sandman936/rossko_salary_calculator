@@ -4,20 +4,22 @@ import "./globals.css";
 import type { ReactNode } from "react";
 
 const inter = Inter({
-	subsets: ["latin"],
-	display: "swap",
-	variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-	title: "Rossko | Калькулятор стоимости выполнения операций",
-	description: "Калькулятор стоимости выполнения операций на складе Rossko г.Подольск",
+  title: "Rossko | Калькулятор стоимости выполнения операций",
+  description:
+    "Калькулятор стоимости выполнения операций на складе Rossko г.Подольск",
+  icons: { icon: "/icon.svg" },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-	return (
-		<html lang="en" className={`${inter.variable} h-full`}>
-			<body className="h-full flex flex-col flex-start">{children}</body>
-		</html>
-	);
+  return (
+    <html lang="en" className={`${inter.variable} h-full`}>
+      <body className="h-full flex flex-col flex-start">{children}</body>
+    </html>
+  );
 }

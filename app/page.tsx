@@ -12,7 +12,8 @@ export default function Home() {
             src="/logo-full.svg"
             alt="Rossko Logo"
             width={150}
-            height={50}
+            height={40}
+            style={{ width: "auto", height: "auto" }}
           />
           <h1 className="text-white text-xl md:text-3xl lg:text-4xl font-bold">
             Калькулятор стоимости выполнения операций на складе Rossko
