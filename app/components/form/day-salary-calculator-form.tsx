@@ -4,17 +4,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import useAnimatedNumber from "@/app/hooks/useAnimateNumber";
-import { calculateSalary } from "@/app/lib/calculate-salary";
-import { type SalaryFormData, salarySchema } from "../../lib/operations-schema";
+import { calculateDaySalary } from "@/app/lib/calculate-day-salary";
+import {
+  type SalaryDayFormData,
+  salaryDaySchema,
+} from "../../lib/operations-schema";
 import { NumberInput } from "../input/number-input";
 
-export default function SalaryCalculatorForm() {
+export default function DaySalaryCalculatorForm() {
   const {
     register,
     control,
     formState: { errors },
-  } = useForm<SalaryFormData>({
-    resolver: zodResolver(salarySchema),
+  } = useForm<SalaryDayFormData>({
+    resolver: zodResolver(salaryDaySchema),
     defaultValues: {
       acceptance: { rows: 0, quantity: 0 },
       placement: { rows: 0, quantity: 0 },
@@ -30,7 +33,7 @@ export default function SalaryCalculatorForm() {
     },
   });
 
-  const salaryValue = useMemo(() => calculateSalary(values), [values]);
+  const salaryValue = useMemo(() => calculateDaySalary(values), [values]);
   const animatedValue = useAnimatedNumber(salaryValue);
 
   const currencyFormatter = new Intl.NumberFormat("ru-RU", {
@@ -93,6 +96,9 @@ export default function SalaryCalculatorForm() {
           {currencyFormatter.format(animatedValue)}
         </span>
       </h2>
+      <h3 className="text-center text-xs md:text-base lg:text-xl text-gray-500">
+        *рассчет производится без вычета 30%
+      </h3>
     </form>
   );
 }

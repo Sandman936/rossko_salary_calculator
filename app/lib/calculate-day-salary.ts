@@ -15,7 +15,7 @@ type PartialSalaryData = {
   placement?: { rows?: number; quantity?: number };
 };
 
-export function calculateSalary(data: PartialSalaryData): number {
+export function calculateDaySalary(data: PartialSalaryData): number {
   const acceptanceTotal =
     n(data.acceptance?.rows) * ACCEPTANCE_PAY_PER_ROW +
     n(data.acceptance?.quantity) * ACCEPTANCE_PAY_PER_QUANTITY;

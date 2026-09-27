@@ -14,9 +14,26 @@ const operationSchema = z.object({
     .max(MAX_VALUE, { message: "Значение превышает максимально допустимое" }),
 });
 
-export const salarySchema = z.object({
+const peopleCountSchema = z.object({
+  total: z
+    .number({ message: "Введите общее количество людей" })
+    .int({ message: "Значение должно быть целым числом" })
+    .min(1, { message: "Значение не может быть меньше 1" })
+    .max(MAX_VALUE, { message: "Значение превышает максимально допустимое" }),
+});
+
+export const salaryDaySchema = z.object({
   acceptance: operationSchema, // Приемка
   placement: operationSchema, // Размещение
 });
 
-export type SalaryFormData = z.infer<typeof salarySchema>;
+export const salaryMonthSchema = z.object({
+  totalAcceptance: operationSchema, // Общая приемка
+  totalPlacement: operationSchema, // Общее размещение
+  yourAcceptance: operationSchema, // Ваша приемка
+  yourPlacement: operationSchema, // Ваше размещение
+  totalPeople: peopleCountSchema, // Общее количество людей
+});
+
+export type SalaryDayFormData = z.infer<typeof salaryDaySchema>;
+export type SalaryMonthFormData = z.infer<typeof salaryMonthSchema>;

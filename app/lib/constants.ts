@@ -3,7 +3,9 @@ const PLACEMENT_PAY_PER_ROW = 7.1;
 const ACCEPTANCE_PAY_PER_QUANTITY = 0.6;
 const PLACEMENT_PAY_PER_QUANTITY = ACCEPTANCE_PAY_PER_QUANTITY;
 
-const MAX_VALUE = 1000000; // Максимальное значение для строк и количества
+const SPLIT_RATE = 0.3; //Доля, которая уходит в общак
+
+const MAX_VALUE = 100000000; // Максимальное значение для строк и количества
 
 export {
   ACCEPTANCE_PAY_PER_QUANTITY,
@@ -11,4 +13,5 @@ export {
   MAX_VALUE,
   PLACEMENT_PAY_PER_QUANTITY,
   PLACEMENT_PAY_PER_ROW,
+  SPLIT_RATE,
 };

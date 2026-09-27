@@ -30,6 +30,7 @@ export function NumberInput({
         id={inputId}
         autoComplete="off"
         type="number"
+        onFocus={(e) => e.target.select()}
         {...registration}
       />
       {error && (
