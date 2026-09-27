@@ -4,10 +4,7 @@ import {
   PLACEMENT_PAY_PER_QUANTITY,
   PLACEMENT_PAY_PER_ROW,
 } from "./constants";
-
-// Приводим любое значение к безопасному числу
-const n = (value: unknown): number =>
-  Number.isFinite(value) ? (value as number) : 0;
+import { calcOperation } from "./utils";
 
 // Принимаем частичные данные — функция всё равно всё нормализует
 type PartialSalaryData = {
@@ -16,13 +13,17 @@ type PartialSalaryData = {
 };
 
 export function calculateDaySalary(data: PartialSalaryData): number {
-  const acceptanceTotal =
-    n(data.acceptance?.rows) * ACCEPTANCE_PAY_PER_ROW +
-    n(data.acceptance?.quantity) * ACCEPTANCE_PAY_PER_QUANTITY;
+  const acceptanceTotal = calcOperation(
+    data.acceptance,
+    ACCEPTANCE_PAY_PER_ROW,
+    ACCEPTANCE_PAY_PER_QUANTITY,
+  );
 
-  const placementTotal =
-    n(data.placement?.rows) * PLACEMENT_PAY_PER_ROW +
-    n(data.placement?.quantity) * PLACEMENT_PAY_PER_QUANTITY;
+  const placementTotal = calcOperation(
+    data.placement,
+    PLACEMENT_PAY_PER_ROW,
+    PLACEMENT_PAY_PER_QUANTITY,
+  );
 
   return acceptanceTotal + placementTotal;
 }
