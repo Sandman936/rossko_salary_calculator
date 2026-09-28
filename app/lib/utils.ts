@@ -6,8 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Приводим любое значение к безопасному числу
-export const n = (value: unknown): number =>
-  Number.isFinite(value) ? (value as number) : 0;
+export const num = (value: unknown): number =>
+  typeof value === "number" && Number.isFinite(value) ? value : 0;
 
 export function calcOperation(
   operation: { rows?: number; quantity?: number } | undefined,
@@ -15,6 +15,6 @@ export function calcOperation(
   payPerQuantity: number,
 ) {
   return (
-    n(operation?.rows) * payPerRow + n(operation?.quantity) * payPerQuantity
+    num(operation?.rows) * payPerRow + num(operation?.quantity) * payPerQuantity
   );
 }

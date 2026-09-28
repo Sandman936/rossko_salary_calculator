@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import DaySalaryCalculatorForm from "./components/form/day-salary-calculator-form";
-import MonthSalaryCalculatorForm from "./components/form/month-salary-calculator-form";
+import PersonalSalaryCalculatorForm from "./components/form/personal-salary-calculator-form";
+import PoolSalaryCalculatorForm from "./components/form/pool-salary-calculator-form";
 import ModeSelector from "./components/selector/mode-selector";
 
-export type modeType = "day" | "month";
+export type modeType = "100" | "70/30";
 
 export default function Home() {
-  const [activeMode, setActiveMode] = useState<modeType>("day");
+  const [activeMode, setActiveMode] = useState<modeType>("100");
 
   return (
     <div className="flex flex-col min-h-screen items-center">
@@ -28,10 +28,10 @@ export default function Home() {
           </h1>
         </div>
         <ModeSelector activeMode={activeMode} setActiveMode={setActiveMode} />
-        {activeMode === "day" ? (
-          <DaySalaryCalculatorForm />
+        {activeMode === "100" ? (
+          <PersonalSalaryCalculatorForm />
         ) : (
-          <MonthSalaryCalculatorForm />
+          <PoolSalaryCalculatorForm />
         )}
       </main>
     </div>

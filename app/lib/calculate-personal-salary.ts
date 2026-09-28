@@ -6,24 +6,26 @@ import {
 } from "./constants";
 import { calcOperation } from "./utils";
 
-// Принимаем частичные данные — функция всё равно всё нормализует
-type PartialSalaryData = {
+type SalaryInput = {
   acceptance?: { rows?: number; quantity?: number };
   placement?: { rows?: number; quantity?: number };
 };
 
-export function calculateDaySalary(data: PartialSalaryData): number {
-  const acceptanceTotal = calcOperation(
+/** Считает полную зарплату: 100% от личных операций (без пула). */
+
+export function calculatePersonalSalary(data: SalaryInput): number {
+  const acceptanceAmount = calcOperation(
     data.acceptance,
     ACCEPTANCE_PAY_PER_ROW,
     ACCEPTANCE_PAY_PER_QUANTITY,
   );
 
-  const placementTotal = calcOperation(
+  const placementAmount = calcOperation(
     data.placement,
     PLACEMENT_PAY_PER_ROW,
     PLACEMENT_PAY_PER_QUANTITY,
   );
 
-  return acceptanceTotal + placementTotal;
+  const total = acceptanceAmount + placementAmount;
+  return Math.round(total * 100) / 100;
 }

@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import useAnimatedNumber from "@/app/hooks/useAnimateNumber";
-import { calculateDaySalary } from "@/app/lib/calculate-day-salary";
+import { calculatePersonalSalary } from "@/app/lib/calculate-personal-salary";
 import {
   type SalaryDayFormData,
   salaryDaySchema,
 } from "../../lib/operations-schema";
 import { NumberInput } from "../input/number-input";
 
-export default function DaySalaryCalculatorForm() {
+export default function PersonalSalaryCalculatorForm() {
   const {
     register,
     control,
@@ -33,7 +33,7 @@ export default function DaySalaryCalculatorForm() {
     },
   });
 
-  const salaryValue = useMemo(() => calculateDaySalary(values), [values]);
+  const salaryValue = useMemo(() => calculatePersonalSalary(values), [values]);
   const animatedValue = useAnimatedNumber(salaryValue);
 
   const currencyFormatter = new Intl.NumberFormat("ru-RU", {
@@ -96,9 +96,6 @@ export default function DaySalaryCalculatorForm() {
           {currencyFormatter.format(animatedValue)}
         </span>
       </h2>
-      <h3 className="text-center text-xs md:text-base lg:text-xl text-gray-500">
-        *рассчет производится без вычета 30%
-      </h3>
     </form>
   );
 }

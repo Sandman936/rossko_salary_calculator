@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import useAnimatedNumber from "@/app/hooks/useAnimateNumber";
-import { calculateMonthSalary } from "@/app/lib/calculate-month-salary";
+import { calculatePoolSalary } from "@/app/lib/calculate-pool-salary";
 import {
   type SalaryMonthFormData,
   salaryMonthSchema,
 } from "@/app/lib/operations-schema";
 import { NumberInput } from "../input/number-input";
 
-export default function MonthSalaryCalculatorForm() {
+export default function PoolSalaryCalculatorForm() {
   const {
     register,
     control,
@@ -39,7 +39,7 @@ export default function MonthSalaryCalculatorForm() {
     },
   });
 
-  const salaryValue = useMemo(() => calculateMonthSalary(values), [values]);
+  const salaryValue = useMemo(() => calculatePoolSalary(values), [values]);
   const animatedValue = useAnimatedNumber(salaryValue);
 
   const currencyFormatter = new Intl.NumberFormat("ru-RU", {
@@ -87,7 +87,7 @@ export default function MonthSalaryCalculatorForm() {
             registration={register("totalPlacement.rows", {
               valueAsNumber: true,
             })}
-            error={errors.yourAcceptance?.rows}
+            error={errors.totalPlacement?.rows}
           />
 
           <NumberInput
@@ -95,7 +95,7 @@ export default function MonthSalaryCalculatorForm() {
             registration={register("totalPlacement.quantity", {
               valueAsNumber: true,
             })}
-            error={errors.yourAcceptance?.quantity}
+            error={errors.totalPlacement?.quantity}
           />
         </div>
       </fieldset>
@@ -110,7 +110,7 @@ export default function MonthSalaryCalculatorForm() {
             label="Ваши строки"
             registration={register("yourAcceptance.rows", {
               valueAsNumber: true,
-          })}
+            })}
             error={errors.yourAcceptance?.rows}
           />
 
