@@ -3,13 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import PersonalSalaryCalculatorForm from "./components/form/personal-salary-calculator-form";
-import PoolSalaryCalculatorForm from "./components/form/pool-salary-calculator-form";
-import ModeSelector from "./components/selector/mode-selector";
-
-export type modeType = "100" | "70/30";
+import ParticipantsTable from "./components/participants-table/participants-table";
+import ModeSelector from "./components/ui/selector/mode-selector";
 
 export default function Home() {
-  const [activeMode, setActiveMode] = useState<modeType>("100");
+  const [isModeSelectorActive, setIsModeSelectorActive] = useState(true);
 
   return (
     <div className="flex flex-col min-h-screen items-center">
@@ -22,16 +20,19 @@ export default function Home() {
             height={40}
             style={{ width: "auto", height: "auto" }}
           />
-          <h1 className="text-white text-xl md:text-3xl lg:text-4xl font-bold">
-            Калькулятор стоимости выполнения операций на складе Rǒssko
-            г.Подольск
-          </h1>
         </div>
-        <ModeSelector activeMode={activeMode} setActiveMode={setActiveMode} />
-        {activeMode === "100" ? (
+        <ModeSelector
+          activeMode={isModeSelectorActive}
+          setActiveMode={setIsModeSelectorActive}
+          modeOneName={"Калькулятор"}
+          modeTwoName={"Таблица лидеров"}
+          modeOneTittle={"Калькулятор личной зарплаты"}
+          modeTwoTittle={"Таблица выполненых сменой операций на складе Rǒssko г.Подольск"}
+        />
+        {isModeSelectorActive ? (
           <PersonalSalaryCalculatorForm />
         ) : (
-          <PoolSalaryCalculatorForm />
+          <ParticipantsTable />
         )}
       </main>
     </div>

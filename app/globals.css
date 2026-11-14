@@ -3,8 +3,8 @@
 :root {
 	--background: #ebebeb91;
 	--foreground: #171717;
-	--accent-color: #ed2d2f;
-	--accent-color-light: rgba(237, 45, 47, 0.1);
+	--accent-color: #2D9DED;
+	--accent-color-light: rgba(45, 106, 237, 0.1);
 }
 
 body {
